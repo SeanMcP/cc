@@ -1,22 +1,34 @@
 <script>
-    console.log('Hello there!')
+  import Router from "svelte-spa-router";
+  import routes from "./routes";
 </script>
 
-<main>
-	<h1>CC</h1>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+  #app {
+    padding: 1em;
+    max-width: 40em;
+    margin: 0 auto;
+  }
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  @media (min-width: 640px) {
+    #app {
+      max-width: none;
+    }
+  }
 </style>
+
+<div id="app">
+  <header>
+    <p>CC</p>
+    <small>Catechism for Young Children</small>
+  </header>
+  <main>
+    <Router {routes} />
+  </main>
+  <footer>
+    <p>
+      Made by
+      <a href="https://seanmcp.com">SeanMcP</a>
+    </p>
+  </footer>
+</div>
