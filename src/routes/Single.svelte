@@ -1,14 +1,14 @@
 <script>
-  // import { onMount } from 'svelte'
   import RouteLayout from "./RouteLayout.svelte";
   import { CC, COUNT } from "../data/cc";
+  import Question from '../components/Question.svelte';
+  import { getNumberedQuestion } from '../utils/get-numbered-question';
   export let params = {};
 
-  $: answer = CC[params.number].answer;
-  $: number = Number(CC[params.number].number);
-  $: question = CC[params.number].question;
+  $: data = CC[params.number]
+  $: number = Number(data.number);
+  $: numberedQuestion = getNumberedQuestion(data)
 
-  $: numberedQuestion = `${number}. ${question}`;
   $: previous = number > 1 ? CC[number - 1] : null;
   $: next = number < COUNT ? CC[number + 1] : null;
 </script>
@@ -17,7 +17,6 @@
   div {
     display: flex;
     justify-content: space-between;
-    flex-start: end;
   }
 
   a {
@@ -34,7 +33,7 @@
 </style>
 
 <RouteLayout title={numberedQuestion}>
-  <p>{answer}</p>
+  <Question data={data} withoutTitle />
   <div>
     {#if previous}
       <a href={`#/q/${previous.number}`} class="previous">
